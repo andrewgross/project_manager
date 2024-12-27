@@ -1,0 +1,10 @@
+FROM ${IMAGE_NAME:-"my/generic_container"} 
+
+WORKDIR /app
+
+# Add project-specific instructions here if needed
+
+COPY . . 
+
+# Command to run within the container
+CMD ["/bin/bash"]

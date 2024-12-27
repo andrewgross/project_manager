@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  {{ project_name }}:
+    image: ${IMAGE_NAME:-"my/generic_container"} 
+    volumes:
+      - ./:/app 
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: ${GPU_COUNT:-1} 
+    command: ["/bin/bash"] 
+    restart: unless-stopped

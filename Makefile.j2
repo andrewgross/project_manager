@@ -1,0 +1,17 @@
+PROJECT_NAME={{ project_name }}
+
+.PHONY: up down save commit
+
+up:
+\tdocker-compose up -d
+
+down:
+\tdocker-compose down
+
+save:
+\tdocker commit $(shell docker ps -q -f name=$(PROJECT_NAME)) $(PROJECT_NAME)_snapshot
+
+commit:
+\tdocker commit $(shell docker ps -q -f name=$(PROJECT_NAME)) $(PROJECT_NAME)_snapshot
+\tdocker-compose down
+\tdocker-compose up -d -f docker-compose.yml
