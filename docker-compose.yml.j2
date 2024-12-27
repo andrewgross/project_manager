@@ -2,14 +2,18 @@ version: "3.9"
 
 services:
   {{ project_name }}:
-    image: ${IMAGE_NAME:-"my/generic_container"} 
+    image: {{ project_name }}:latest # Use the project-specific tag
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ./:/app 
+      - ./:/app
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: ${GPU_COUNT:-1} 
-    command: ["/bin/bash"] 
+              count: {{ GPU_COUNT }}
+    command: ["/bin/bash"]
     restart: unless-stopped
+    container_name: {{ project_name }}
