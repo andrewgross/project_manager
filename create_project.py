@@ -45,7 +45,7 @@ def create_project_dir(project_name, git_repo=None, gpu_count=None, image_name="
         f.write(dockerfile_content)
 
     if git_repo:
-        src_path = project_path / 'src'
+        src_path = project_path / 'code'
         src_path.mkdir(exist_ok=True)
         try:
             subprocess.run(['git', 'clone', git_repo, str(src_path)], check=True)
