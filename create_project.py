@@ -4,12 +4,16 @@
 #     "jinja2",
 # ]
 # ///
-from pathlib import Path
 import argparse
-from jinja2 import Environment, FileSystemLoader
+import os
 import subprocess
 
-def create_project_dir(project_name, git_repo=None, gpu_count=None, image_name="ubuntu-cuda:v2"):
+from pathlib import Path
+
+from jinja2 import Environment, FileSystemLoader
+
+
+def create_project_dir(project_name, git_repo=None, gpu_count=None, image_name="ubuntu-cuda:v3"):
     """Creates a project directory, renders templates, clones a Git repo, and tags a Docker image."""
 
     project_path = Path(project_name)
@@ -63,7 +67,7 @@ if __name__ == "__main__":
     parser.add_argument("project_name", help="The name of the project.")
     parser.add_argument("--git-repo", help="The URL of the Git repository to clone.")
     parser.add_argument("--gpu-count", type=str, default="-1", help="Number of GPUs or 'all'.")
-    parser.add_argument("--image-name", type=str, default="ubuntu-cuda:v2", help="The local Docker image to use") # removed version tag from default image
+    parser.add_argument("--image-name", type=str, default="ubuntu-cuda:v3", help="The local Docker image to use") # removed version tag from default image
     args = parser.parse_args()
 
     # Validate gpu_count
