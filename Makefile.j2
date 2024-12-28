@@ -4,15 +4,18 @@ IMAGE_NAME={{ image_name }}
 .PHONY: up down save commit
 
 up:
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
 
 save:
-	docker commit $(shell docker ps -q -f name=$(PROJECT_NAME)) $(PROJECT_NAME)_snapshot
+	docker commit $(shell docker ps -q -f name=$(PROJECT_NAME)) $(PROJECT_NAME)
 
 commit:
 	docker commit $(shell docker ps -q -f name=$(PROJECT_NAME)) $(PROJECT_NAME):latest # Tag the snapshot as project_name:latest
-	docker-compose down
-	docker-compose up -d
+	docker compose down
+	docker compose up -d
+
+shell:
+	docker compose exec -it {{ project_name }} bash

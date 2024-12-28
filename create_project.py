@@ -50,8 +50,8 @@ def create_project_dir(project_name, git_repo=None, gpu_count=None, image_name="
 
     # Tag the local image with a project-specific name
     try:
-        subprocess.run(['docker', 'tag', image_name, f"{project_name}_base"], check=True)
-        print(f"Tagged local image as {project_name}_base")
+        subprocess.run(['docker', 'tag', image_name, f"{project_name}"], check=True)
+        print(f"Tagged local image as {project_name}")
     except subprocess.CalledProcessError as e:
         print(f"Error tagging Docker image: {e}. Ensure the image '{image_name}' exists locally.")
         exit(1)
