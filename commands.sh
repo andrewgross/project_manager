@@ -17,17 +17,18 @@ create_project() {
     return 1
   fi
 
-  command="$PROJECT_MANAGER_DIRECTORY/create_project.py $project_name"
-  shift # Remove project name from arguments
+  pushd "$PROJECT_MANAGER_DIRECTORY" > /dev/null
+    command="uv run create_project.py $@"
 
-  command="$command $@"
-
-  uv run "$command"
-
+    echo $PWD
+    echo $command
+    $command
   if [ $? -eq 0 ]; then
+    popd > /dev/null
     cd "$PROJECTS_DIRECTORY/$project_name"
     echo "Project '$project_name' created successfully and switched directory."
   else
+    popd > /dev/null
     echo "Error: Failed to create project '$project_name'."
   fi
 }
