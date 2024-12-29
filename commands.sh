@@ -5,7 +5,7 @@ PROJECTS_DIRECTORY=~/Development
 
 if [ ! -d "$PROJECT_MANAGER_DIRECTORY" ]; then
   echo "Error: project_manager directory not found at $PROJECT_MANAGER_DIRECTORY"
-  exit 1
+  return 1
 fi
 
 create_project() {
@@ -14,7 +14,7 @@ create_project() {
   if [ -z "$project_name" ]; then
     echo "Error: Please provide a project name."
     uv run $PROJECT_MANAGER_DIRECTORY/create_project.py --help
-    exit 1
+    return 1
   fi
 
   command="$PROJECT_MANAGER_DIRECTORY/create_project.py $project_name"
