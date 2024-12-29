@@ -18,4 +18,4 @@ commit:
 	docker compose up -d
 
 shell:
-	docker compose exec -it {{ project_name }} bash
+	docker compose exec -u 1000:1000 -it {{ project_name }} bash
