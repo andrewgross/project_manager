@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./app:/app
+      - /data2:/data2
+      - /data:/data
     runtime: nvidia
     deploy:
       resources:
